@@ -7,7 +7,7 @@ import (
 )
 
 // Change to true if needed.
-var taskWithAsteriskIsCompleted = false
+var taskWithAsteriskIsCompleted = true
 
 var text = `Как видите, он  спускается  по  лестнице  вслед  за  своим
 	другом   Кристофером   Робином,   головой   вниз,  пересчитывая
@@ -77,6 +77,60 @@ func TestTop10(t *testing.T) {
 				"то",        // 4
 			}
 			require.Equal(t, expected, Top10(text))
+		}
+	})
+}
+
+func TestTop10Frequency(t *testing.T) {
+	t.Run("no words in empty string", func(t *testing.T) {
+		require.Len(t, Top10(""), 0)
+	})
+
+	t.Run("positive test", func(t *testing.T) {
+		if taskWithAsteriskIsCompleted {
+			expected := WordFrequencyList{
+				{
+					Word:      "а",
+					Frequency: 8,
+				},
+				{
+					Word:      "он",
+					Frequency: 8,
+				},
+				{
+					Word:      "и",
+					Frequency: 6,
+				},
+				{
+					Word:      "ты",
+					Frequency: 5,
+				},
+				{
+					Word:      "что",
+					Frequency: 5,
+				},
+				{
+					Word:      "в",
+					Frequency: 4,
+				},
+				{
+					Word:      "его",
+					Frequency: 4,
+				},
+				{
+					Word:      "если",
+					Frequency: 4,
+				},
+				{
+					Word:      "кристофер",
+					Frequency: 4,
+				},
+				{
+					Word:      "не",
+					Frequency: 4,
+				},
+			}
+			require.Equal(t, expected, FrequencyAnalisys(text).TopFrequencies(10))
 		}
 	})
 }
