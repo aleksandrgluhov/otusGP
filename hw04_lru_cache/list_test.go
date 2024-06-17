@@ -48,4 +48,15 @@ func TestList(t *testing.T) {
 		}
 		require.Equal(t, []int{70, 80, 60, 40, 10, 30, 50}, elems)
 	})
+	t.Run("capacity", func(t *testing.T) {
+		l := NewList()
+		for i := 0; i < 1_000_000; i++ {
+			if i%2 == 0 {
+				l.PushFront(i)
+			} else {
+				l.PushBack(i)
+			}
+		}
+		require.Equal(t, 1_000_000, l.Len())
+	})
 }
